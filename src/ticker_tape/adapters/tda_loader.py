@@ -11,11 +11,9 @@ class TDALoader(object):
                  end=None,
                  period='year'):
         self.host = 'https://api.tdameritrade.com/'
-        self.api_key = 'TICKER@AMER.OAUTHAP'
         self.symbol = symbol
-        self.params = {'apiKey': self.api_key}
-
         self.api_key = get_config('TDAmeritrade', 'API_KEY')
+
         self.params = {
             'apikey': self.api_key,
             'periodType': period,

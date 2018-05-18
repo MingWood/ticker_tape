@@ -16,8 +16,11 @@ class TickerServer(object):
         self.server = web.Application()
 
     async def list_tasks(self, request):
-        print(self.scheduler.schedule[0].tasks[0].consumer_stats)
-        return web.Response(text=json.dumps(self.scheduler.schedule))
+        return web.Response(
+            text=json.dumps(
+                self.scheduler.schedule[0].tasks[0].consumer_stats
+            )
+        )
 
     def _add_routes(self):
         self.server.add_routes([web.get('/', self.list_tasks)])
