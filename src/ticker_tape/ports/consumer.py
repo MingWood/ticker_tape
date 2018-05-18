@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import json
+
 from ticker_tape.adapters.stream_analyze_consumer import StreamPredictorConsumer
 
 
@@ -19,6 +21,9 @@ class StreamConsumer(Consumer):
             'run_count': self.adapter.run_count,
             'runs': self.adapter.runs
         }
+
+    def __repr__(self):
+        return json.dumps(self.consumer_stats)
 
     async def handle(self, payload):
         await self.adapter.handle(payload)

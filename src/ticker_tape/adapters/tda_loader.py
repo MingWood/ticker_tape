@@ -30,6 +30,5 @@ class TDALoader(object):
         if resp['status'] >= 400:
             raise ValueError('API failed: ' + resp['response'])
 
-        resp['response'] = json.loads(resp['response'])['candles']
-        resp['headers'] = dict(resp['headers'])
-        return resp
+        return json.loads(resp['response'])['candles']
+

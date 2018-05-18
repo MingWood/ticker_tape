@@ -16,9 +16,9 @@ class TickerServer(object):
         self.server = web.Application()
 
     async def list_tasks(self, request):
-        return web.Response(
-            text=json.dumps(
-                self.scheduler.schedule[0].tasks[0].consumer_stats
+        return web.json_response(
+            json.loads(
+                repr(self.scheduler.schedule)
             )
         )
 

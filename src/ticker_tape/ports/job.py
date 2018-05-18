@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import json
+
 from ticker_tape.ports.loader import DataLoaderPort
 from ticker_tape.adapters.pricehistory_job import PriceHistoryJob
 
@@ -26,6 +28,7 @@ class LiveJob(Job):
                                tasks=tasks,
                                minutes_between_runs=minutes_between_runs,
                                **kw)
+        self.symbol = symbol
         self.task_name = self.adapter.task_name
         self.minutes_between_runs = self.adapter.minutes_between_runs
         self.run_count = self.adapter.run_count
@@ -33,6 +36,17 @@ class LiveJob(Job):
         self.status = self.adapter.status
         self.tasks = self.adapter.tasks
         self.running_job = None
+
+    def __repr__(self):
+        return json.dumps({
+            'task_name': self.task_name,
+            'symbol': self.symbol,
+            'minutes_between_runs': self.minutes_between_runs,
+            'run_count': self.run_count,
+            'failure_msg': self.failure_msg,
+            'status': self.status,
+            'tasks': [json.loads(repr(t)) for t in self.tasks],
+        })
 
     def running_job_reference(self, job):
         self.running_job = job

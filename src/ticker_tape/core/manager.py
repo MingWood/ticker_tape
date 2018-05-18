@@ -27,9 +27,10 @@ class JobManager(object):
         configured_consumers = []
         for consumer in consumers:
             consumer_cls = port_factory(list(consumer.keys())[0])
+            name = list(consumer.values())[0]
 
-            algo = self.consumer_manager.retrieve_algorithm(list(consumer.values())[0])
-            configured_consumers.append(consumer_cls(algorithm=algo))
+            algo = self.consumer_manager.retrieve_algorithm(name)
+            configured_consumers.append(consumer_cls(algorithm=algo, name=name))
 
         return configured_consumers
 
