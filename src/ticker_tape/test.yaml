@@ -1,0 +1,8 @@
+SPXtestOne:
+  type: LiveJob
+  symbol: SPX
+  frequency: daily
+  minutes_to_look_back: 21600
+  minutes_between_runs: .1
+  consumers:
+    - StreamConsumer: my_test_algorithm_1
