@@ -6,3 +6,4 @@ SPXtestOne:
   minutes_between_runs: .033
   consumers:
     - StreamConsumer: my_test_algorithm_1
+    - StreamExportConsumer: AAPL_Daily

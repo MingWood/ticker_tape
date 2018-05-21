@@ -9,7 +9,7 @@ class ConsumerManager(object):
 
     def retrieve_algorithm(self, name):
         if name not in self.algorithms.keys():
-            raise KeyError('algorithm selected was not found: ' + name)
+            return None
         return self.algorithms[name]
 
 
@@ -23,20 +23,21 @@ class JobManager(object):
     async def load_instruction(self, path):
         self.instruction = await self.loader.formatted_schedule(path)
 
-    def generate_consumers(self, consumers):
+    def generate_consumers(self, consumers, **job):
         configured_consumers = []
         for consumer in consumers:
+
             consumer_cls = port_factory(list(consumer.keys())[0])
             name = list(consumer.values())[0]
 
             algo = self.consumer_manager.retrieve_algorithm(name)
-            configured_consumers.append(consumer_cls(algorithm=algo, name=name))
+            configured_consumers.append(consumer_cls(name=name, algorithm=algo, **job))
 
         return configured_consumers
 
     def generate_jobs(self):
         for name, job in self.instruction.items():
-            consumers = self.generate_consumers(job.pop('consumers'))
+            consumers = self.generate_consumers(job.pop('consumers'), **job)
             job_cls = port_factory(job.pop('type'))
             self.schedule.append(job_cls(**job, tasks=consumers, task_name=name))
 

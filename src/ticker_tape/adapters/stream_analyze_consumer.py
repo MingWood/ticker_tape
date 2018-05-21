@@ -1,6 +1,6 @@
 
 class StreamPredictorConsumer(object):
-    def __init__(self, algorithm, name):
+    def __init__(self, name, algorithm=None, **kw):
         self.algorithm = algorithm
         self.name = name
         self.run_count = 0
