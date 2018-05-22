@@ -26,6 +26,9 @@ class StreamInfluxDBConsumer(object):
             'minutes_between_runs': kw.get('minutes_between_runs'),
         }
 
+        self._ensure_db_connection()
+        self._ensure_retention_policy()
+
     def _ensure_db_connection(self):
         dbs = self.client.get_list_database()
 
@@ -74,7 +77,7 @@ class StreamInfluxDBConsumer(object):
     async def handle(self, payload):
         self.run_count += 1
         try:
-            results, err = await self._write_datapoints(payload)
+            results, err = self._write_datapoints(payload)
         except Exception as emsg:
             err = str(emsg)
             results = {}
