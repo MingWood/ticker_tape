@@ -1,6 +1,21 @@
 version: '3.4'
 
 services:
+  tape_server:
+    image: ticker_tape:0.1.0
+    ports:
+      - target: 8080
+        published: 8080
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+
   grafana:
     image: grafana_ticker:0.0.0
     ports:

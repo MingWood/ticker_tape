@@ -7,3 +7,4 @@ idna-ssl==1.0.1
 multidict==4.3.1
 PyYAML==3.12
 yarl==1.2.4
+influxdb==5.0.0
