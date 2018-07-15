@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     import asyncio
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(a.load_schedule('test.yaml'))
+    loop.run_until_complete(a.load_schedule('example.yaml'))
 
     print(a.schedule)
     print(a.schedule[0].task_name)
