@@ -2,8 +2,8 @@ SPXtestOne:
   type: LiveJob
   symbol: AAPL
   frequency: daily
-  minutes_to_look_back: 129600
+  minutes_to_look_back: 131400
   minutes_between_runs: .033
   consumers:
     - StreamConsumer: my_test_algorithm_1
-    - StreamExportConsumer: AAPL_Daily
+#    - StreamExportConsumer: AAPL_Daily
