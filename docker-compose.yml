@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   tape_server:
-    image: ticker_tape:0.1.0
+    image: ticker_tape:0.1.1
     ports:
       - target: 8080
         published: 8080

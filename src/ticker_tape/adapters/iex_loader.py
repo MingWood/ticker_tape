@@ -25,7 +25,8 @@ class IEXLoader(object):
                  symbol,
                  frequency='daily',
                  start=None,
-                 end=None):
+                 end=None,
+                 period=None):
         self.timeframe = (end - start) / 60 / 1000
 
         if frequency not in IEX_SUPPORTED_FREQUENCIES:

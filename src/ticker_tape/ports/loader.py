@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ticker_tape.adapters.tda_loader import TDALoader
+from ticker_tape.adapters.iex_loader import IEXLoader
 from ticker_tape.adapters.instruction_loader import InstructionFileLoaderAdapter
 
 
@@ -32,7 +32,7 @@ class DataLoader(Loader):
 
 class DataLoaderPort(DataLoader):
     def __init__(self, *args, **kw):
-        super().__init__(TDALoader, *args, **kw)
+        super().__init__(IEXLoader, *args, **kw)
 
 
 class InstructionLoader(Loader):
